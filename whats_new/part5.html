@@ -1,0 +1,1511 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>5. PEP 378: Format Specifier for Thousands Separator</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/py.png"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="" href="../index.html"/>
+        <link rel="up" title="What’s New in Python 2.7" href="2.7.html"/>
+        <link rel="next" title="6. PEP 389: The argparse Module for Parsing Command Lines" href="part6.html"/>
+        <link rel="prev" title="4. PEP 372: Adding an Ordered Dictionary to collections" href="part4.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Python Documentation
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="2.7.html">What&#8217;s New in Python 2.7</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="part1.html">1. The Future for Python 2.x</a></li>
+<li class="toctree-l2"><a class="reference internal" href="part2.html">2. Changes to the Handling of Deprecation Warnings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="part3.html">3. Python 3.1 Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="part4.html">4. PEP 372: Adding an Ordered Dictionary to collections</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">5. PEP 378: Format Specifier for Thousands Separator</a></li>
+<li class="toctree-l2"><a class="reference internal" href="part6.html">6. PEP 389: The argparse Module for Parsing Command Lines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="part7.html">7. PEP 391: Dictionary-Based Configuration For Logging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="part8.html">8. PEP 3106: Dictionary Views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="part9.html">9. PEP 3137: The memoryview Object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="part10.html">10. Other Language Changes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="part10.html#interpreter-changes">10.1. Interpreter Changes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="part10.html#optimizations">10.2. Optimizations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="part11.html">11. New and Improved Modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="part11.html#new-module-importlib">11.1. New module: importlib</a></li>
+<li class="toctree-l3"><a class="reference internal" href="part11.html#new-module-sysconfig">11.2. New module: sysconfig</a></li>
+<li class="toctree-l3"><a class="reference internal" href="part11.html#ttk-themed-widgets-for-tk">11.3. ttk: Themed Widgets for Tk</a></li>
+<li class="toctree-l3"><a class="reference internal" href="part11.html#updated-module-unittest">11.4. Updated module: unittest</a></li>
+<li class="toctree-l3"><a class="reference internal" href="part11.html#updated-module-elementtree-1-3">11.5. Updated module: ElementTree 1.3</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="part12.html">12. Build and C API Changes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="part12.html#capsules">12.1. Capsules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="part12.html#port-specific-changes-windows">12.2. Port-Specific Changes: Windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="part12.html#port-specific-changes-mac-os-x">12.3. Port-Specific Changes: Mac OS X</a></li>
+<li class="toctree-l3"><a class="reference internal" href="part12.html#port-specific-changes-freebsd">12.4. Port-Specific Changes: FreeBSD</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="part13.html">13. Other Changes and Fixes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="part14.html">14. Porting to Python 2.7</a></li>
+<li class="toctree-l2"><a class="reference internal" href="part15.html">15. New Features Added to Python 2.7 Maintenance Releases</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="part15.html#pep-434-idle-enhancement-exception-for-all-branches">15.1. PEP 434: IDLE Enhancement Exception for All Branches</a></li>
+<li class="toctree-l3"><a class="reference internal" href="part15.html#pep-466-network-security-enhancements-for-python-2-7">15.2. PEP 466: Network Security Enhancements for Python 2.7</a></li>
+<li class="toctree-l3"><a class="reference internal" href="part15.html#pep-477-backport-ensurepip-pep-453-to-python-2-7">15.3. PEP 477: Backport ensurepip (PEP 453) to Python 2.7</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="part15.html#bootstrapping-pip-by-default">15.3.1. Bootstrapping pip By Default</a></li>
+<li class="toctree-l4"><a class="reference internal" href="part15.html#documentation-changes">15.3.2. Documentation Changes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="part15.html#pep-476-enabling-certificate-verification-by-default-for-stdlib-http-clients">15.4. PEP 476: Enabling certificate verification by default for stdlib http clients</a></li>
+<li class="toctree-l3"><a class="reference internal" href="part15.html#pep-493-https-verification-migration-tools-for-python-2-7">15.5. PEP 493: HTTPS verification migration tools for Python 2.7</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="part16.html">16. Acknowledgements</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">The Python Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/appetite.html">1. Whetting Your Appetite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/interpreter.html">2. Using the Python Interpreter</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/interpreter.html#invoking-the-interpreter">2.1. Invoking the Interpreter</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../tutorial/interpreter.html#argument-passing">2.1.1. Argument Passing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tutorial/interpreter.html#interactive-mode">2.1.2. Interactive Mode</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/interpreter.html#the-interpreter-and-its-environment">2.2. The Interpreter and Its Environment</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../tutorial/interpreter.html#source-code-encoding">2.2.1. Source Code Encoding</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/introduction.html">3. An Informal Introduction to Python</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/introduction.html#using-python-as-a-calculator">3.1. Using Python as a Calculator</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../tutorial/introduction.html#numbers">3.1.1. Numbers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tutorial/introduction.html#strings">3.1.2. Strings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tutorial/introduction.html#unicode-strings">3.1.3. Unicode Strings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tutorial/introduction.html#lists">3.1.4. Lists</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/introduction.html#first-steps-towards-programming">3.2. First Steps Towards Programming</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/controlflow.html">4. More Control Flow Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/controlflow.html#if-statements">4.1. <code class="docutils literal"><span class="pre">if</span></code> Statements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/controlflow.html#for-statements">4.2. <code class="docutils literal"><span class="pre">for</span></code> Statements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/controlflow.html#the-range-function">4.3. The <code class="docutils literal"><span class="pre">range()</span></code> Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/controlflow.html#break-and-continue-statements-and-else-clauses-on-loops">4.4. <code class="docutils literal"><span class="pre">break</span></code> and <code class="docutils literal"><span class="pre">continue</span></code> Statements, and <code class="docutils literal"><span class="pre">else</span></code> Clauses on Loops</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/controlflow.html#pass-statements">4.5. <code class="docutils literal"><span class="pre">pass</span></code> Statements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/controlflow.html#defining-functions">4.6. Defining Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/controlflow.html#more-on-defining-functions">4.7. More on Defining Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../tutorial/controlflow.html#default-argument-values">4.7.1. Default Argument Values</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tutorial/controlflow.html#keyword-arguments">4.7.2. Keyword Arguments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tutorial/controlflow.html#arbitrary-argument-lists">4.7.3. Arbitrary Argument Lists</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tutorial/controlflow.html#unpacking-argument-lists">4.7.4. Unpacking Argument Lists</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tutorial/controlflow.html#lambda-expressions">4.7.5. Lambda Expressions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tutorial/controlflow.html#documentation-strings">4.7.6. Documentation Strings</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/controlflow.html#intermezzo-coding-style">4.8. Intermezzo: Coding Style</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/datastructures.html">5. Data Structures</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/datastructures.html#more-on-lists">5.1. More on Lists</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../tutorial/datastructures.html#using-lists-as-stacks">5.1.1. Using Lists as Stacks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tutorial/datastructures.html#using-lists-as-queues">5.1.2. Using Lists as Queues</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tutorial/datastructures.html#functional-programming-tools">5.1.3. Functional Programming Tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tutorial/datastructures.html#list-comprehensions">5.1.4. List Comprehensions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/datastructures.html#the-del-statement">5.2. The <code class="docutils literal"><span class="pre">del</span></code> statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/datastructures.html#tuples-and-sequences">5.3. Tuples and Sequences</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/datastructures.html#sets">5.4. Sets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/datastructures.html#dictionaries">5.5. Dictionaries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/datastructures.html#looping-techniques">5.6. Looping Techniques</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/datastructures.html#more-on-conditions">5.7. More on Conditions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/datastructures.html#comparing-sequences-and-other-types">5.8. Comparing Sequences and Other Types</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/modules.html">6. Modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/modules.html#more-on-modules">6.1. More on Modules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../tutorial/modules.html#executing-modules-as-scripts">6.1.1. Executing modules as scripts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tutorial/modules.html#the-module-search-path">6.1.2. The Module Search Path</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tutorial/modules.html#compiled-python-files">6.1.3. &#8220;Compiled&#8221; Python files</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/modules.html#standard-modules">6.2. Standard Modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/modules.html#the-dir-function">6.3. The <code class="docutils literal"><span class="pre">dir()</span></code> Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/modules.html#packages">6.4. Packages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../tutorial/modules.html#importing-from-a-package">6.4.1. Importing * From a Package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tutorial/modules.html#intra-package-references">6.4.2. Intra-package References</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tutorial/modules.html#packages-in-multiple-directories">6.4.3. Packages in Multiple Directories</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/inputoutput.html">7. Input and Output</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/inputoutput.html#fancier-output-formatting">7.1. Fancier Output Formatting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../tutorial/inputoutput.html#old-string-formatting">7.1.1. Old string formatting</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/inputoutput.html#reading-and-writing-files">7.2. Reading and Writing Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../tutorial/inputoutput.html#methods-of-file-objects">7.2.1. Methods of File Objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tutorial/inputoutput.html#saving-structured-data-with-json">7.2.2. Saving structured data with <code class="docutils literal"><span class="pre">json</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/errors.html">8. Errors and Exceptions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/errors.html#syntax-errors">8.1. Syntax Errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/errors.html#exceptions">8.2. Exceptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/errors.html#handling-exceptions">8.3. Handling Exceptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/errors.html#raising-exceptions">8.4. Raising Exceptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/errors.html#user-defined-exceptions">8.5. User-defined Exceptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/errors.html#defining-clean-up-actions">8.6. Defining Clean-up Actions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/errors.html#predefined-clean-up-actions">8.7. Predefined Clean-up Actions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/classes.html">9. Classes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/classes.html#a-word-about-names-and-objects">9.1. A Word About Names and Objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/classes.html#python-scopes-and-namespaces">9.2. Python Scopes and Namespaces</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/classes.html#a-first-look-at-classes">9.3. A First Look at Classes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../tutorial/classes.html#class-definition-syntax">9.3.1. Class Definition Syntax</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tutorial/classes.html#class-objects">9.3.2. Class Objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tutorial/classes.html#instance-objects">9.3.3. Instance Objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tutorial/classes.html#method-objects">9.3.4. Method Objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tutorial/classes.html#class-and-instance-variables">9.3.5. Class and Instance Variables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/classes.html#random-remarks">9.4. Random Remarks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/classes.html#inheritance">9.5. Inheritance</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../tutorial/classes.html#multiple-inheritance">9.5.1. Multiple Inheritance</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/classes.html#private-variables-and-class-local-references">9.6. Private Variables and Class-local References</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/classes.html#odds-and-ends">9.7. Odds and Ends</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/classes.html#exceptions-are-classes-too">9.8. Exceptions Are Classes Too</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/classes.html#iterators">9.9. Iterators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/classes.html#generators">9.10. Generators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/classes.html#generator-expressions">9.11. Generator Expressions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/stdlib.html">10. Brief Tour of the Standard Library</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/stdlib.html#operating-system-interface">10.1. Operating System Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/stdlib.html#file-wildcards">10.2. File Wildcards</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/stdlib.html#command-line-arguments">10.3. Command Line Arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/stdlib.html#error-output-redirection-and-program-termination">10.4. Error Output Redirection and Program Termination</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/stdlib.html#string-pattern-matching">10.5. String Pattern Matching</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/stdlib.html#mathematics">10.6. Mathematics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/stdlib.html#internet-access">10.7. Internet Access</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/stdlib.html#dates-and-times">10.8. Dates and Times</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/stdlib.html#data-compression">10.9. Data Compression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/stdlib.html#performance-measurement">10.10. Performance Measurement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/stdlib.html#quality-control">10.11. Quality Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/stdlib.html#batteries-included">10.12. Batteries Included</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/stdlib2.html">11. Brief Tour of the Standard Library &#8211; Part II</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/stdlib2.html#output-formatting">11.1. Output Formatting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/stdlib2.html#templating">11.2. Templating</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/stdlib2.html#working-with-binary-data-record-layouts">11.3. Working with Binary Data Record Layouts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/stdlib2.html#multi-threading">11.4. Multi-threading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/stdlib2.html#logging">11.5. Logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/stdlib2.html#weak-references">11.6. Weak References</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/stdlib2.html#tools-for-working-with-lists">11.7. Tools for Working with Lists</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/stdlib2.html#decimal-floating-point-arithmetic">11.8. Decimal Floating Point Arithmetic</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/whatnow.html">12. What Now?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/interactive.html">13. Interactive Input Editing and History Substitution</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/interactive.html#line-editing">13.1. Line Editing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/interactive.html#history-substitution">13.2. History Substitution</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/interactive.html#key-bindings">13.3. Key Bindings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/interactive.html#alternatives-to-the-interactive-interpreter">13.4. Alternatives to the Interactive Interpreter</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/floatingpoint.html">14. Floating Point Arithmetic:  Issues and Limitations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/floatingpoint.html#representation-error">14.1. Representation Error</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/appendix.html">15. Appendix</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../tutorial/appendix.html#interactive-mode">15.1. Interactive Mode</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../tutorial/appendix.html#error-handling">15.1.1. Error Handling</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tutorial/appendix.html#executable-python-scripts">15.1.2. Executable Python Scripts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tutorial/appendix.html#the-interactive-startup-file">15.1.3. The Interactive Startup File</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../tutorial/appendix.html#the-customization-modules">15.1.4. The Customization Modules</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">The Python Language Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/introduction.html">1. Introduction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/introduction.html#alternate-implementations">1.1. Alternate Implementations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/introduction.html#notation">1.2. Notation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/lexical_analysis.html">2. Lexical analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/lexical_analysis.html#line-structure">2.1. Line structure</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../reference/lexical_analysis.html#logical-lines">2.1.1. Logical lines</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/lexical_analysis.html#physical-lines">2.1.2. Physical lines</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/lexical_analysis.html#comments">2.1.3. Comments</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/lexical_analysis.html#encoding-declarations">2.1.4. Encoding declarations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/lexical_analysis.html#explicit-line-joining">2.1.5. Explicit line joining</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/lexical_analysis.html#implicit-line-joining">2.1.6. Implicit line joining</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/lexical_analysis.html#blank-lines">2.1.7. Blank lines</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/lexical_analysis.html#indentation">2.1.8. Indentation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/lexical_analysis.html#whitespace-between-tokens">2.1.9. Whitespace between tokens</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/lexical_analysis.html#other-tokens">2.2. Other tokens</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/lexical_analysis.html#identifiers">2.3. Identifiers and keywords</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../reference/lexical_analysis.html#keywords">2.3.1. Keywords</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/lexical_analysis.html#reserved-classes-of-identifiers">2.3.2. Reserved classes of identifiers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/lexical_analysis.html#literals">2.4. Literals</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../reference/lexical_analysis.html#string-literals">2.4.1. String literals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/lexical_analysis.html#string-literal-concatenation">2.4.2. String literal concatenation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/lexical_analysis.html#numeric-literals">2.4.3. Numeric literals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/lexical_analysis.html#integer-and-long-integer-literals">2.4.4. Integer and long integer literals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/lexical_analysis.html#floating-point-literals">2.4.5. Floating point literals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/lexical_analysis.html#imaginary-literals">2.4.6. Imaginary literals</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/lexical_analysis.html#operators">2.5. Operators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/lexical_analysis.html#delimiters">2.6. Delimiters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/datamodel.html">3. Data model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/datamodel.html#objects-values-and-types">3.1. Objects, values and types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/datamodel.html#the-standard-type-hierarchy">3.2. The standard type hierarchy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/datamodel.html#new-style-and-classic-classes">3.3. New-style and classic classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/datamodel.html#special-method-names">3.4. Special method names</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../reference/datamodel.html#basic-customization">3.4.1. Basic customization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/datamodel.html#customizing-attribute-access">3.4.2. Customizing attribute access</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/datamodel.html#customizing-class-creation">3.4.3. Customizing class creation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/datamodel.html#customizing-instance-and-subclass-checks">3.4.4. Customizing instance and subclass checks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/datamodel.html#emulating-callable-objects">3.4.5. Emulating callable objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/datamodel.html#emulating-container-types">3.4.6. Emulating container types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/datamodel.html#additional-methods-for-emulation-of-sequence-types">3.4.7. Additional methods for emulation of sequence types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/datamodel.html#emulating-numeric-types">3.4.8. Emulating numeric types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/datamodel.html#coercion-rules">3.4.9. Coercion rules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/datamodel.html#with-statement-context-managers">3.4.10. With Statement Context Managers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/datamodel.html#special-method-lookup-for-old-style-classes">3.4.11. Special method lookup for old-style classes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/datamodel.html#special-method-lookup-for-new-style-classes">3.4.12. Special method lookup for new-style classes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/executionmodel.html">4. Execution model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/executionmodel.html#naming-and-binding">4.1. Naming and binding</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../reference/executionmodel.html#interaction-with-dynamic-features">4.1.1. Interaction with dynamic features</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/executionmodel.html#exceptions">4.2. Exceptions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/expressions.html">5. Expressions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/expressions.html#arithmetic-conversions">5.1. Arithmetic conversions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/expressions.html#atoms">5.2. Atoms</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../reference/expressions.html#atom-identifiers">5.2.1. Identifiers (Names)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/expressions.html#literals">5.2.2. Literals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/expressions.html#parenthesized-forms">5.2.3. Parenthesized forms</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/expressions.html#list-displays">5.2.4. List displays</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/expressions.html#displays-for-sets-and-dictionaries">5.2.5. Displays for sets and dictionaries</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/expressions.html#generator-expressions">5.2.6. Generator expressions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/expressions.html#dictionary-displays">5.2.7. Dictionary displays</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/expressions.html#set-displays">5.2.8. Set displays</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/expressions.html#string-conversions">5.2.9. String conversions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/expressions.html#yield-expressions">5.2.10. Yield expressions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/expressions.html#primaries">5.3. Primaries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../reference/expressions.html#attribute-references">5.3.1. Attribute references</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/expressions.html#subscriptions">5.3.2. Subscriptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/expressions.html#slicings">5.3.3. Slicings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../reference/expressions.html#calls">5.3.4. Calls</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/expressions.html#the-power-operator">5.4. The power operator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/expressions.html#unary-arithmetic-and-bitwise-operations">5.5. Unary arithmetic and bitwise operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/expressions.html#binary-arithmetic-operations">5.6. Binary arithmetic operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/expressions.html#shifting-operations">5.7. Shifting operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/expressions.html#binary-bitwise-operations">5.8. Binary bitwise operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/expressions.html#not-in">5.9. Comparisons</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/expressions.html#boolean-operations">5.10. Boolean operations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/expressions.html#conditional-expressions">5.11. Conditional Expressions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/expressions.html#lambda">5.12. Lambdas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/expressions.html#expression-lists">5.13. Expression lists</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/expressions.html#evaluation-order">5.14. Evaluation order</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/expressions.html#operator-precedence">5.15. Operator precedence</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/simple_stmts.html">6. Simple statements</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/simple_stmts.html#expression-statements">6.1. Expression statements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/simple_stmts.html#assignment-statements">6.2. Assignment statements</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../reference/simple_stmts.html#augmented-assignment-statements">6.2.1. Augmented assignment statements</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/simple_stmts.html#the-assert-statement">6.3. The <code class="docutils literal"><span class="pre">assert</span></code> statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/simple_stmts.html#the-pass-statement">6.4. The <code class="docutils literal"><span class="pre">pass</span></code> statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/simple_stmts.html#the-del-statement">6.5. The <code class="docutils literal"><span class="pre">del</span></code> statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/simple_stmts.html#the-print-statement">6.6. The <code class="docutils literal"><span class="pre">print</span></code> statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/simple_stmts.html#the-return-statement">6.7. The <code class="docutils literal"><span class="pre">return</span></code> statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/simple_stmts.html#the-yield-statement">6.8. The <code class="docutils literal"><span class="pre">yield</span></code> statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/simple_stmts.html#the-raise-statement">6.9. The <code class="docutils literal"><span class="pre">raise</span></code> statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/simple_stmts.html#the-break-statement">6.10. The <code class="docutils literal"><span class="pre">break</span></code> statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/simple_stmts.html#the-continue-statement">6.11. The <code class="docutils literal"><span class="pre">continue</span></code> statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/simple_stmts.html#the-import-statement">6.12. The <code class="docutils literal"><span class="pre">import</span></code> statement</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../reference/simple_stmts.html#future-statements">6.12.1. Future statements</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/simple_stmts.html#the-global-statement">6.13. The <code class="docutils literal"><span class="pre">global</span></code> statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/simple_stmts.html#the-exec-statement">6.14. The <code class="docutils literal"><span class="pre">exec</span></code> statement</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/compound_stmts.html">7. Compound statements</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/compound_stmts.html#the-if-statement">7.1. The <code class="docutils literal"><span class="pre">if</span></code> statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/compound_stmts.html#the-while-statement">7.2. The <code class="docutils literal"><span class="pre">while</span></code> statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/compound_stmts.html#the-for-statement">7.3. The <code class="docutils literal"><span class="pre">for</span></code> statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/compound_stmts.html#the-try-statement">7.4. The <code class="docutils literal"><span class="pre">try</span></code> statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/compound_stmts.html#the-with-statement">7.5. The <code class="docutils literal"><span class="pre">with</span></code> statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/compound_stmts.html#function-definitions">7.6. Function definitions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/compound_stmts.html#class-definitions">7.7. Class definitions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/toplevel_components.html">8. Top-level components</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../reference/toplevel_components.html#complete-python-programs">8.1. Complete Python programs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/toplevel_components.html#file-input">8.2. File input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/toplevel_components.html#interactive-input">8.3. Interactive input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../reference/toplevel_components.html#expression-input">8.4. Expression input</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/grammar.html">9. Full Grammar specification</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../using/index.html">Python Setup and Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../using/cmdline.html">1. Command line and environment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../using/cmdline.html#command-line">1.1. Command line</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../using/cmdline.html#interface-options">1.1.1. Interface options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../using/cmdline.html#generic-options">1.1.2. Generic options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../using/cmdline.html#miscellaneous-options">1.1.3. Miscellaneous options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../using/cmdline.html#options-you-shouldn-t-use">1.1.4. Options you shouldn&#8217;t use</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../using/cmdline.html#environment-variables">1.2. Environment variables</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../using/cmdline.html#debug-mode-variables">1.2.1. Debug-mode variables</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../using/unix.html">2. Using Python on Unix platforms</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../using/unix.html#getting-and-installing-the-latest-version-of-python">2.1. Getting and installing the latest version of Python</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../using/unix.html#on-linux">2.1.1. On Linux</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../using/unix.html#on-freebsd-and-openbsd">2.1.2. On FreeBSD and OpenBSD</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../using/unix.html#on-opensolaris">2.1.3. On OpenSolaris</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../using/unix.html#building-python">2.2. Building Python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../using/unix.html#python-related-paths-and-files">2.3. Python-related paths and files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../using/unix.html#miscellaneous">2.4. Miscellaneous</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../using/unix.html#editors">2.5. Editors</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../using/windows.html">3. Using Python on Windows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../using/windows.html#installing-python">3.1. Installing Python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../using/windows.html#alternative-bundles">3.2. Alternative bundles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../using/windows.html#configuring-python">3.3. Configuring Python</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../using/windows.html#excursus-setting-environment-variables">3.3.1. Excursus: Setting environment variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../using/windows.html#finding-the-python-executable">3.3.2. Finding the Python executable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../using/windows.html#finding-modules">3.3.3. Finding modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../using/windows.html#executing-scripts">3.3.4. Executing scripts</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../using/windows.html#additional-modules">3.4. Additional modules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../using/windows.html#pywin32">3.4.1. PyWin32</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../using/windows.html#py2exe">3.4.2. Py2exe</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../using/windows.html#wconio">3.4.3. WConio</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../using/windows.html#compiling-python-on-windows">3.5. Compiling Python on Windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../using/windows.html#other-resources">3.6. Other resources</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../using/mac.html">4. Using Python on a Macintosh</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../using/mac.html#getting-and-installing-macpython">4.1. Getting and Installing MacPython</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../using/mac.html#how-to-run-a-python-script">4.1.1. How to run a Python script</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../using/mac.html#running-scripts-with-a-gui">4.1.2. Running scripts with a GUI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../using/mac.html#configuration">4.1.3. Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../using/mac.html#the-ide">4.2. The IDE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../using/mac.html#installing-additional-python-packages">4.3. Installing Additional Python Packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../using/mac.html#gui-programming-on-the-mac">4.4. GUI Programming on the Mac</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../using/mac.html#distributing-python-applications-on-the-mac">4.5. Distributing Python Applications on the Mac</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../using/mac.html#other-resources">4.6. Other Resources</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../howto/index.html">Python HOWTOs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../howto/pyporting.html">1. Porting Python 2 Code to Python 3</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../howto/pyporting.html#the-short-explanation">1.1. The Short Explanation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/pyporting.html#details">1.2. Details</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../howto/pyporting.html#drop-support-for-python-2-5-and-older-at-least">1.2.1. Drop support for Python 2.5 and older (at least)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/pyporting.html#make-sure-you-specify-the-proper-version-support-in-your-setup-py-file">1.2.2. Make sure you specify the proper version support in your <code class="docutils literal"><span class="pre">setup.py</span></code> file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/pyporting.html#have-good-test-coverage">1.2.3. Have good test coverage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/pyporting.html#learn-the-differences-between-python-2-3">1.2.4. Learn the differences between Python 2 &amp; 3</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/pyporting.html#update-your-code">1.2.5. Update your code</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/pyporting.html#prevent-compatibility-regressions">1.2.6. Prevent compatibility regressions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/pyporting.html#check-which-dependencies-block-your-transition">1.2.7. Check which dependencies block your transition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/pyporting.html#update-your-setup-py-file-to-denote-python-3-compatibility">1.2.8. Update your <code class="docutils literal"><span class="pre">setup.py</span></code> file to denote Python 3 compatibility</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/pyporting.html#use-continuous-integration-to-stay-compatible">1.2.9. Use continuous integration to stay compatible</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/pyporting.html#dropping-python-2-support-completely">1.3. Dropping Python 2 support completely</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../howto/cporting.html">2. Porting Extension Modules to Python 3</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../howto/cporting.html#conditional-compilation">2.1. Conditional compilation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/cporting.html#changes-to-object-apis">2.2. Changes to Object APIs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../howto/cporting.html#str-unicode-unification">2.2.1. str/unicode Unification</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/cporting.html#long-int-unification">2.2.2. long/int Unification</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/cporting.html#module-initialization-and-state">2.3. Module initialization and state</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/cporting.html#cobject-replaced-with-capsule">2.4. CObject replaced with Capsule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/cporting.html#other-options">2.5. Other options</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../howto/curses.html">3. Curses Programming with Python</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../howto/curses.html#what-is-curses">3.1. What is curses?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../howto/curses.html#the-python-curses-module">3.1.1. The Python curses module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/curses.html#starting-and-ending-a-curses-application">3.2. Starting and ending a curses application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/curses.html#windows-and-pads">3.3. Windows and Pads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/curses.html#displaying-text">3.4. Displaying Text</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../howto/curses.html#attributes-and-color">3.4.1. Attributes and Color</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/curses.html#user-input">3.5. User Input</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/curses.html#for-more-information">3.6. For More Information</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../howto/descriptor.html">4. Descriptor HowTo Guide</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../howto/descriptor.html#abstract">4.1. Abstract</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/descriptor.html#definition-and-introduction">4.2. Definition and Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/descriptor.html#descriptor-protocol">4.3. Descriptor Protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/descriptor.html#invoking-descriptors">4.4. Invoking Descriptors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/descriptor.html#descriptor-example">4.5. Descriptor Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/descriptor.html#properties">4.6. Properties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/descriptor.html#functions-and-methods">4.7. Functions and Methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/descriptor.html#static-methods-and-class-methods">4.8. Static Methods and Class Methods</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../howto/doanddont.html">5. Idioms and Anti-Idioms in Python</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../howto/doanddont.html#language-constructs-you-should-not-use">5.1. Language Constructs You Should Not Use</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../howto/doanddont.html#from-module-import">5.1.1. from module import *</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/doanddont.html#unadorned-exec-execfile-and-friends">5.1.2. Unadorned <code class="docutils literal"><span class="pre">exec</span></code>, <code class="docutils literal"><span class="pre">execfile()</span></code> and friends</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/doanddont.html#from-module-import-name1-name2">5.1.3. from module import name1, name2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/doanddont.html#except">5.1.4. except:</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/doanddont.html#exceptions">5.2. Exceptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/doanddont.html#using-the-batteries">5.3. Using the Batteries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/doanddont.html#using-backslash-to-continue-statements">5.4. Using Backslash to Continue Statements</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../howto/functional.html">6. Functional Programming HOWTO</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../howto/functional.html#introduction">6.1. Introduction</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../howto/functional.html#formal-provability">6.1.1. Formal provability</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/functional.html#modularity">6.1.2. Modularity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/functional.html#ease-of-debugging-and-testing">6.1.3. Ease of debugging and testing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/functional.html#composability">6.1.4. Composability</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/functional.html#iterators">6.2. Iterators</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../howto/functional.html#data-types-that-support-iterators">6.2.1. Data Types That Support Iterators</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/functional.html#generator-expressions-and-list-comprehensions">6.3. Generator expressions and list comprehensions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/functional.html#generators">6.4. Generators</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../howto/functional.html#passing-values-into-a-generator">6.4.1. Passing values into a generator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/functional.html#built-in-functions">6.5. Built-in functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/functional.html#small-functions-and-the-lambda-expression">6.6. Small functions and the lambda expression</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/functional.html#the-itertools-module">6.7. The itertools module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../howto/functional.html#creating-new-iterators">6.7.1. Creating new iterators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/functional.html#calling-functions-on-elements">6.7.2. Calling functions on elements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/functional.html#selecting-elements">6.7.3. Selecting elements</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/functional.html#grouping-elements">6.7.4. Grouping elements</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/functional.html#the-functools-module">6.8. The functools module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../howto/functional.html#the-operator-module">6.8.1. The operator module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/functional.html#revision-history-and-acknowledgements">6.9. Revision History and Acknowledgements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/functional.html#references">6.10. References</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../howto/functional.html#general">6.10.1. General</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/functional.html#python-specific">6.10.2. Python-specific</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/functional.html#python-documentation">6.10.3. Python documentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../howto/logging.html">7. Logging HOWTO</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../howto/logging.html#basic-logging-tutorial">7.1. Basic Logging Tutorial</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../howto/logging.html#when-to-use-logging">7.1.1. When to use logging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/logging.html#a-simple-example">7.1.2. A simple example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/logging.html#logging-to-a-file">7.1.3. Logging to a file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/logging.html#logging-from-multiple-modules">7.1.4. Logging from multiple modules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/logging.html#logging-variable-data">7.1.5. Logging variable data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/logging.html#changing-the-format-of-displayed-messages">7.1.6. Changing the format of displayed messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/logging.html#displaying-the-date-time-in-messages">7.1.7. Displaying the date/time in messages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/logging.html#next-steps">7.1.8. Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/logging.html#advanced-logging-tutorial">7.2. Advanced Logging Tutorial</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../howto/logging.html#logging-flow">7.2.1. Logging Flow</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/logging.html#loggers">7.2.2. Loggers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/logging.html#handlers">7.2.3. Handlers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/logging.html#formatters">7.2.4. Formatters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/logging.html#configuring-logging">7.2.5. Configuring Logging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/logging.html#what-happens-if-no-configuration-is-provided">7.2.6. What happens if no configuration is provided</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/logging.html#configuring-logging-for-a-library">7.2.7. Configuring Logging for a Library</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/logging.html#logging-levels">7.3. Logging Levels</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../howto/logging.html#custom-levels">7.3.1. Custom Levels</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/logging.html#useful-handlers">7.4. Useful Handlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/logging.html#exceptions-raised-during-logging">7.5. Exceptions raised during logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/logging.html#using-arbitrary-objects-as-messages">7.6. Using arbitrary objects as messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/logging.html#optimization">7.7. Optimization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../howto/logging-cookbook.html">8. Logging Cookbook</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../howto/logging-cookbook.html#using-logging-in-multiple-modules">8.1. Using logging in multiple modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/logging-cookbook.html#logging-from-multiple-threads">8.2. Logging from multiple threads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/logging-cookbook.html#multiple-handlers-and-formatters">8.3. Multiple handlers and formatters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/logging-cookbook.html#logging-to-multiple-destinations">8.4. Logging to multiple destinations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/logging-cookbook.html#configuration-server-example">8.5. Configuration server example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/logging-cookbook.html#sending-and-receiving-logging-events-across-a-network">8.6. Sending and receiving logging events across a network</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/logging-cookbook.html#adding-contextual-information-to-your-logging-output">8.7. Adding contextual information to your logging output</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../howto/logging-cookbook.html#using-loggeradapters-to-impart-contextual-information">8.7.1. Using LoggerAdapters to impart contextual information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/logging-cookbook.html#using-filters-to-impart-contextual-information">8.7.2. Using Filters to impart contextual information</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/logging-cookbook.html#logging-to-a-single-file-from-multiple-processes">8.8. Logging to a single file from multiple processes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/logging-cookbook.html#using-file-rotation">8.9. Using file rotation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/logging-cookbook.html#an-example-dictionary-based-configuration">8.10. An example dictionary-based configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/logging-cookbook.html#inserting-a-bom-into-messages-sent-to-a-sysloghandler">8.11. Inserting a BOM into messages sent to a SysLogHandler</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/logging-cookbook.html#implementing-structured-logging">8.12. Implementing structured logging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/logging-cookbook.html#customizing-handlers-with-dictconfig">8.13. Customizing handlers with <code class="docutils literal"><span class="pre">dictConfig()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/logging-cookbook.html#configuring-filters-with-dictconfig">8.14. Configuring filters with <code class="docutils literal"><span class="pre">dictConfig()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/logging-cookbook.html#customized-exception-formatting">8.15. Customized exception formatting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/logging-cookbook.html#speaking-logging-messages">8.16. Speaking logging messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/logging-cookbook.html#buffering-logging-messages-and-outputting-them-conditionally">8.17. Buffering logging messages and outputting them conditionally</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/logging-cookbook.html#formatting-times-using-utc-gmt-via-configuration">8.18. Formatting times using UTC (GMT) via configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/logging-cookbook.html#using-a-context-manager-for-selective-logging">8.19. Using a context manager for selective logging</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../howto/regex.html">9. Regular Expression HOWTO</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../howto/regex.html#introduction">9.1. Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/regex.html#simple-patterns">9.2. Simple Patterns</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../howto/regex.html#matching-characters">9.2.1. Matching Characters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/regex.html#repeating-things">9.2.2. Repeating Things</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/regex.html#using-regular-expressions">9.3. Using Regular Expressions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../howto/regex.html#compiling-regular-expressions">9.3.1. Compiling Regular Expressions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/regex.html#the-backslash-plague">9.3.2. The Backslash Plague</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/regex.html#performing-matches">9.3.3. Performing Matches</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/regex.html#module-level-functions">9.3.4. Module-Level Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/regex.html#compilation-flags">9.3.5. Compilation Flags</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/regex.html#more-pattern-power">9.4. More Pattern Power</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../howto/regex.html#more-metacharacters">9.4.1. More Metacharacters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/regex.html#grouping">9.4.2. Grouping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/regex.html#non-capturing-and-named-groups">9.4.3. Non-capturing and Named Groups</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/regex.html#lookahead-assertions">9.4.4. Lookahead Assertions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/regex.html#modifying-strings">9.5. Modifying Strings</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../howto/regex.html#splitting-strings">9.5.1. Splitting Strings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/regex.html#search-and-replace">9.5.2. Search and Replace</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/regex.html#common-problems">9.6. Common Problems</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../howto/regex.html#use-string-methods">9.6.1. Use String Methods</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/regex.html#match-versus-search">9.6.2. match() versus search()</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/regex.html#greedy-versus-non-greedy">9.6.3. Greedy versus Non-Greedy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/regex.html#using-re-verbose">9.6.4. Using re.VERBOSE</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/regex.html#feedback">9.7. Feedback</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../howto/sockets.html">10. Socket Programming HOWTO</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../howto/sockets.html#sockets">10.1. Sockets</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../howto/sockets.html#history">10.1.1. History</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/sockets.html#creating-a-socket">10.2. Creating a Socket</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../howto/sockets.html#ipc">10.2.1. IPC</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/sockets.html#using-a-socket">10.3. Using a Socket</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../howto/sockets.html#binary-data">10.3.1. Binary Data</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/sockets.html#disconnecting">10.4. Disconnecting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../howto/sockets.html#when-sockets-die">10.4.1. When Sockets Die</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/sockets.html#non-blocking-sockets">10.5. Non-blocking Sockets</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../howto/sockets.html#performance">10.5.1. Performance</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../howto/sorting.html">11. Sorting HOW TO</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../howto/sorting.html#sorting-basics">11.1. Sorting Basics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/sorting.html#key-functions">11.2. Key Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/sorting.html#operator-module-functions">11.3. Operator Module Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/sorting.html#ascending-and-descending">11.4. Ascending and Descending</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/sorting.html#sort-stability-and-complex-sorts">11.5. Sort Stability and Complex Sorts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/sorting.html#the-old-way-using-decorate-sort-undecorate">11.6. The Old Way Using Decorate-Sort-Undecorate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/sorting.html#the-old-way-using-the-cmp-parameter">11.7. The Old Way Using the <em>cmp</em> Parameter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/sorting.html#odd-and-ends">11.8. Odd and Ends</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../howto/unicode.html">12. Unicode HOWTO</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../howto/unicode.html#introduction-to-unicode">12.1. Introduction to Unicode</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../howto/unicode.html#history-of-character-codes">12.1.1. History of Character Codes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/unicode.html#definitions">12.1.2. Definitions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/unicode.html#encodings">12.1.3. Encodings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/unicode.html#references">12.1.4. References</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/unicode.html#python-2-x-s-unicode-support">12.2. Python 2.x&#8217;s Unicode Support</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../howto/unicode.html#the-unicode-type">12.2.1. The Unicode Type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/unicode.html#unicode-literals-in-python-source-code">12.2.2. Unicode Literals in Python Source Code</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/unicode.html#unicode-properties">12.2.3. Unicode Properties</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/unicode.html#id1">12.2.4. References</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/unicode.html#reading-and-writing-unicode-data">12.3. Reading and Writing Unicode Data</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../howto/unicode.html#unicode-filenames">12.3.1. Unicode filenames</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/unicode.html#tips-for-writing-unicode-aware-programs">12.3.2. Tips for Writing Unicode-aware Programs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/unicode.html#id2">12.3.3. References</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/unicode.html#revision-history-and-acknowledgements">12.4. Revision History and Acknowledgements</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../howto/urllib2.html">13. HOWTO Fetch Internet Resources Using urllib2</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../howto/urllib2.html#introduction">13.1. Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/urllib2.html#fetching-urls">13.2. Fetching URLs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../howto/urllib2.html#data">13.2.1. Data</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/urllib2.html#headers">13.2.2. Headers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/urllib2.html#handling-exceptions">13.3. Handling Exceptions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../howto/urllib2.html#urlerror">13.3.1. URLError</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/urllib2.html#httperror">13.3.2. HTTPError</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/urllib2.html#wrapping-it-up">13.3.3. Wrapping it Up</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/urllib2.html#info-and-geturl">13.4. info and geturl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/urllib2.html#openers-and-handlers">13.5. Openers and Handlers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/urllib2.html#id6">13.6. Basic Authentication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/urllib2.html#proxies">13.7. Proxies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/urllib2.html#sockets-and-layers">13.8. Sockets and Layers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/urllib2.html#footnotes">13.9. Footnotes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../howto/webservers.html">14. HOWTO Use Python in the web</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../howto/webservers.html#the-low-level-view">14.1. The Low-Level View</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../howto/webservers.html#common-gateway-interface">14.1.1. Common Gateway Interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/webservers.html#mod-python">14.1.2. mod_python</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/webservers.html#fastcgi-and-scgi">14.1.3. FastCGI and SCGI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/webservers.html#mod-wsgi">14.1.4. mod_wsgi</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/webservers.html#step-back-wsgi">14.2. Step back: WSGI</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../howto/webservers.html#wsgi-servers">14.2.1. WSGI Servers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/webservers.html#case-study-moinmoin">14.2.2. Case study: MoinMoin</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/webservers.html#model-view-controller">14.3. Model-View-Controller</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/webservers.html#ingredients-for-websites">14.4. Ingredients for Websites</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../howto/webservers.html#templates">14.4.1. Templates</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../howto/webservers.html#data-persistence">14.4.2. Data persistence</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/webservers.html#frameworks">14.5. Frameworks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../howto/webservers.html#some-notable-frameworks">14.5.1. Some notable frameworks</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../howto/argparse.html">15. Argparse Tutorial</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../howto/argparse.html#concepts">15.1. Concepts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/argparse.html#the-basics">15.2. The basics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/argparse.html#introducing-positional-arguments">15.3. Introducing Positional arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/argparse.html#introducing-optional-arguments">15.4. Introducing Optional arguments</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../howto/argparse.html#short-options">15.4.1. Short options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/argparse.html#combining-positional-and-optional-arguments">15.5. Combining Positional and Optional arguments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/argparse.html#getting-a-little-more-advanced">15.6. Getting a little more advanced</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../howto/argparse.html#conflicting-options">15.6.1. Conflicting options</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../howto/argparse.html#conclusion">15.7. Conclusion</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../installing/index.html">Installing Python Modules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installing/index.html#key-terms">Key terms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installing/index.html#basic-usage">Basic usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installing/index.html#how-do-i">How do I ...?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../installing/index.html#install-pip-in-versions-of-python-prior-to-python-2-7-9">... install <code class="docutils literal"><span class="pre">pip</span></code> in versions of Python prior to Python 2.7.9?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../installing/index.html#install-packages-just-for-the-current-user">... install packages just for the current user?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../installing/index.html#install-scientific-python-packages">... install scientific Python packages?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../installing/index.html#work-with-multiple-versions-of-python-installed-in-parallel">... work with multiple versions of Python installed in parallel?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../installing/index.html#common-installation-issues">Common installation issues</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../installing/index.html#installing-into-the-system-python-on-linux">Installing into the system Python on Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../installing/index.html#installing-binary-extensions">Installing binary extensions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../distributing/index.html">Distributing Python Modules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../distributing/index.html#key-terms">Key terms</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../distributing/index.html#open-source-licensing-and-collaboration">Open source licensing and collaboration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../distributing/index.html#installing-the-tools">Installing the tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../distributing/index.html#reading-the-guide">Reading the guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../distributing/index.html#how-do-i">How do I...?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../distributing/index.html#choose-a-name-for-my-project">... choose a name for my project?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../distributing/index.html#create-and-distribute-binary-extensions">... create and distribute binary extensions?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../extending/index.html">Extending and Embedding the Python Interpreter</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../extending/extending.html">1. Extending Python with C or C++</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../extending/extending.html#a-simple-example">1.1. A Simple Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extending/extending.html#intermezzo-errors-and-exceptions">1.2. Intermezzo: Errors and Exceptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extending/extending.html#back-to-the-example">1.3. Back to the Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extending/extending.html#the-module-s-method-table-and-initialization-function">1.4. The Module&#8217;s Method Table and Initialization Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extending/extending.html#compilation-and-linkage">1.5. Compilation and Linkage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extending/extending.html#calling-python-functions-from-c">1.6. Calling Python Functions from C</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extending/extending.html#extracting-parameters-in-extension-functions">1.7. Extracting Parameters in Extension Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extending/extending.html#keyword-parameters-for-extension-functions">1.8. Keyword Parameters for Extension Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extending/extending.html#building-arbitrary-values">1.9. Building Arbitrary Values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extending/extending.html#reference-counts">1.10. Reference Counts</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../extending/extending.html#reference-counting-in-python">1.10.1. Reference Counting in Python</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../extending/extending.html#ownership-rules">1.10.2. Ownership Rules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../extending/extending.html#thin-ice">1.10.3. Thin Ice</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../extending/extending.html#null-pointers">1.10.4. NULL Pointers</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../extending/extending.html#writing-extensions-in-c">1.11. Writing Extensions in C++</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extending/extending.html#providing-a-c-api-for-an-extension-module">1.12. Providing a C API for an Extension Module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../extending/newtypes.html">2. Defining New Types</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../extending/newtypes.html#the-basics">2.1. The Basics</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../extending/newtypes.html#adding-data-and-methods-to-the-basic-example">2.1.1. Adding data and methods to the Basic example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../extending/newtypes.html#providing-finer-control-over-data-attributes">2.1.2. Providing finer control over data attributes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../extending/newtypes.html#supporting-cyclic-garbage-collection">2.1.3. Supporting cyclic garbage collection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../extending/newtypes.html#subclassing-other-types">2.1.4. Subclassing other types</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../extending/newtypes.html#type-methods">2.2. Type Methods</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../extending/newtypes.html#finalization-and-de-allocation">2.2.1. Finalization and De-allocation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../extending/newtypes.html#object-presentation">2.2.2. Object Presentation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../extending/newtypes.html#attribute-management">2.2.3. Attribute Management</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../extending/newtypes.html#object-comparison">2.2.4. Object Comparison</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../extending/newtypes.html#abstract-protocol-support">2.2.5. Abstract Protocol Support</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../extending/newtypes.html#weak-reference-support">2.2.6. Weak Reference Support</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../extending/newtypes.html#more-suggestions">2.2.7. More Suggestions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../extending/building.html">3. Building C and C++ Extensions with distutils</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../extending/building.html#distributing-your-extension-modules">3.1. Distributing your extension modules</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../extending/windows.html">4. Building C and C++ Extensions on Windows</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../extending/windows.html#a-cookbook-approach">4.1. A Cookbook Approach</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extending/windows.html#differences-between-unix-and-windows">4.2. Differences Between Unix and Windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extending/windows.html#using-dlls-in-practice">4.3. Using DLLs in Practice</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../extending/embedding.html">5. Embedding Python in Another Application</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../extending/embedding.html#very-high-level-embedding">5.1. Very High Level Embedding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extending/embedding.html#beyond-very-high-level-embedding-an-overview">5.2. Beyond Very High Level Embedding: An overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extending/embedding.html#pure-embedding">5.3. Pure Embedding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extending/embedding.html#extending-embedded-python">5.4. Extending Embedded Python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extending/embedding.html#embedding-python-in-c">5.5. Embedding Python in C++</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extending/embedding.html#compiling-and-linking-under-unix-like-systems">5.6. Compiling and Linking under Unix-like systems</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../c-api/index.html">Python/C API Reference Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../c-api/intro.html">1. Introduction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../c-api/intro.html#include-files">1.1. Include Files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../c-api/intro.html#objects-types-and-reference-counts">1.2. Objects, Types and Reference Counts</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../c-api/intro.html#reference-counts">1.2.1. Reference Counts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../c-api/intro.html#types">1.2.2. Types</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../c-api/intro.html#exceptions">1.3. Exceptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../c-api/intro.html#embedding-python">1.4. Embedding Python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../c-api/intro.html#debugging-builds">1.5. Debugging Builds</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../c-api/veryhigh.html">2. The Very High Level Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../c-api/refcounting.html">3. Reference Counting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../c-api/exceptions.html">4. Exception Handling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../c-api/exceptions.html#unicode-exception-objects">4.1. Unicode Exception Objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../c-api/exceptions.html#recursion-control">4.2. Recursion Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../c-api/exceptions.html#standard-exceptions">4.3. Standard Exceptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../c-api/exceptions.html#string-exceptions">4.4. String Exceptions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../c-api/utilities.html">5. Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../c-api/sys.html">5.1. Operating System Utilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../c-api/sys.html#system-functions">5.2. System Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../c-api/sys.html#process-control">5.3. Process Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../c-api/import.html">5.4. Importing Modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../c-api/marshal.html">5.5. Data marshalling support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../c-api/arg.html">5.6. Parsing arguments and building values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../c-api/conversion.html">5.7. String conversion and formatting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../c-api/reflection.html">5.8. Reflection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../c-api/codec.html">5.9. Codec registry and support functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../c-api/codec.html#codec-lookup-api">5.9.1. Codec lookup API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../c-api/codec.html#registry-api-for-unicode-encoding-error-handlers">5.9.2. Registry API for Unicode encoding error handlers</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../c-api/abstract.html">6. Abstract Objects Layer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../c-api/object.html">6.1. Object Protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../c-api/number.html">6.2. Number Protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../c-api/sequence.html">6.3. Sequence Protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../c-api/mapping.html">6.4. Mapping Protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../c-api/iter.html">6.5. Iterator Protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../c-api/objbuffer.html">6.6. Old Buffer Protocol</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../c-api/concrete.html">7. Concrete Objects Layer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../c-api/concrete.html#fundamental-objects">7.1. Fundamental Objects</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../c-api/type.html">7.1.1. Type Objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../c-api/none.html">7.1.2. The None Object</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../c-api/concrete.html#numeric-objects">7.2. Numeric Objects</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../c-api/int.html">7.2.1. Plain Integer Objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../c-api/bool.html">7.2.2. Boolean Objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../c-api/long.html">7.2.3. Long Integer Objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../c-api/float.html">7.2.4. Floating Point Objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../c-api/complex.html">7.2.5. Complex Number Objects</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../c-api/concrete.html#sequence-objects">7.3. Sequence Objects</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../c-api/bytearray.html">7.3.1. Byte Array Objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../c-api/string.html">7.3.2. String/Bytes Objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../c-api/unicode.html">7.3.3. Unicode Objects and Codecs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../c-api/buffer.html">7.3.4. Buffers and Memoryview Objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../c-api/tuple.html">7.3.5. Tuple Objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../c-api/list.html">7.3.6. List Objects</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../c-api/concrete.html#mapping-objects">7.4. Mapping Objects</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../c-api/dict.html">7.4.1. Dictionary Objects</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../c-api/concrete.html#other-objects">7.5. Other Objects</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../c-api/class.html">7.5.1. Class and Instance Objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../c-api/function.html">7.5.2. Function Objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../c-api/method.html">7.5.3. Method Objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../c-api/file.html">7.5.4. File Objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../c-api/module.html">7.5.5. Module Objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../c-api/iterator.html">7.5.6. Iterator Objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../c-api/descriptor.html">7.5.7. Descriptor Objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../c-api/slice.html">7.5.8. Slice Objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../c-api/weakref.html">7.5.9. Weak Reference Objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../c-api/capsule.html">7.5.10. Capsules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../c-api/cobject.html">7.5.11. CObjects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../c-api/cell.html">7.5.12. Cell Objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../c-api/gen.html">7.5.13. Generator Objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../c-api/datetime.html">7.5.14. DateTime Objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../c-api/set.html">7.5.15. Set Objects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../c-api/code.html">7.5.16. Code Objects</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../c-api/init.html">8. Initialization, Finalization, and Threads</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../c-api/init.html#initializing-and-finalizing-the-interpreter">8.1. Initializing and finalizing the interpreter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../c-api/init.html#process-wide-parameters">8.2. Process-wide parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../c-api/init.html#thread-state-and-the-global-interpreter-lock">8.3. Thread State and the Global Interpreter Lock</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../c-api/init.html#releasing-the-gil-from-extension-code">8.3.1. Releasing the GIL from extension code</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../c-api/init.html#non-python-created-threads">8.3.2. Non-Python created threads</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../c-api/init.html#high-level-api">8.3.3. High-level API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../c-api/init.html#low-level-api">8.3.4. Low-level API</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../c-api/init.html#sub-interpreter-support">8.4. Sub-interpreter support</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../c-api/init.html#bugs-and-caveats">8.4.1. Bugs and caveats</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../c-api/init.html#asynchronous-notifications">8.5. Asynchronous Notifications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../c-api/init.html#profiling-and-tracing">8.6. Profiling and Tracing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../c-api/init.html#advanced-debugger-support">8.7. Advanced Debugger Support</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../c-api/memory.html">9. Memory Management</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../c-api/memory.html#overview">9.1. Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../c-api/memory.html#memory-interface">9.2. Memory Interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../c-api/memory.html#examples">9.3. Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../c-api/objimpl.html">10. Object Implementation Support</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../c-api/allocation.html">10.1. Allocating Objects on the Heap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../c-api/structures.html">10.2. Common Object Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../c-api/typeobj.html">10.3. Type Objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../c-api/typeobj.html#number-object-structures">10.4. Number Object Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../c-api/typeobj.html#mapping-object-structures">10.5. Mapping Object Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../c-api/typeobj.html#sequence-object-structures">10.6. Sequence Object Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../c-api/typeobj.html#buffer-object-structures">10.7. Buffer Object Structures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../c-api/gcsupport.html">10.8. Supporting Cyclic Garbage Collection</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../glossary.html#symbols">symbols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../glossary.html#a-e">a-e</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../glossary.html#f-h">f-h</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../glossary.html#i-k">i-k</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../glossary.html#l-n">l-n</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../glossary.html#o-z">o-z</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">Python Frequently Asked Questions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../faq/general.html">1. General Python FAQ</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../faq/general.html#general-information">1.1. General Information</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../faq/general.html#what-is-python">1.1.1. What is Python?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/general.html#what-is-the-python-software-foundation">1.1.2. What is the Python Software Foundation?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/general.html#are-there-copyright-restrictions-on-the-use-of-python">1.1.3. Are there copyright restrictions on the use of Python?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/general.html#why-was-python-created-in-the-first-place">1.1.4. Why was Python created in the first place?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/general.html#what-is-python-good-for">1.1.5. What is Python good for?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/general.html#how-does-the-python-version-numbering-scheme-work">1.1.6. How does the Python version numbering scheme work?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/general.html#how-do-i-obtain-a-copy-of-the-python-source">1.1.7. How do I obtain a copy of the Python source?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/general.html#how-do-i-get-documentation-on-python">1.1.8. How do I get documentation on Python?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/general.html#i-ve-never-programmed-before-is-there-a-python-tutorial">1.1.9. I&#8217;ve never programmed before. Is there a Python tutorial?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/general.html#is-there-a-newsgroup-or-mailing-list-devoted-to-python">1.1.10. Is there a newsgroup or mailing list devoted to Python?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/general.html#how-do-i-get-a-beta-test-version-of-python">1.1.11. How do I get a beta test version of Python?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/general.html#how-do-i-submit-bug-reports-and-patches-for-python">1.1.12. How do I submit bug reports and patches for Python?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/general.html#are-there-any-published-articles-about-python-that-i-can-reference">1.1.13. Are there any published articles about Python that I can reference?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/general.html#are-there-any-books-on-python">1.1.14. Are there any books on Python?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/general.html#where-in-the-world-is-www-python-org-located">1.1.15. Where in the world is www.python.org located?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/general.html#why-is-it-called-python">1.1.16. Why is it called Python?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/general.html#do-i-have-to-like-monty-python-s-flying-circus">1.1.17. Do I have to like &#8220;Monty Python&#8217;s Flying Circus&#8221;?</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/general.html#python-in-the-real-world">1.2. Python in the real world</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../faq/general.html#how-stable-is-python">1.2.1. How stable is Python?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/general.html#how-many-people-are-using-python">1.2.2. How many people are using Python?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/general.html#have-any-significant-projects-been-done-in-python">1.2.3. Have any significant projects been done in Python?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/general.html#what-new-developments-are-expected-for-python-in-the-future">1.2.4. What new developments are expected for Python in the future?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/general.html#is-it-reasonable-to-propose-incompatible-changes-to-python">1.2.5. Is it reasonable to propose incompatible changes to Python?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/general.html#is-python-a-good-language-for-beginning-programmers">1.2.6. Is Python a good language for beginning programmers?</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/general.html#upgrading-python">1.3. Upgrading Python</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../faq/general.html#what-is-this-bsddb185-module-my-application-keeps-complaining-about">1.3.1. What is this bsddb185 module my application keeps complaining about?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../faq/programming.html">2. Programming FAQ</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../faq/programming.general.html">2.1. General Questions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.general.html#is-there-a-source-code-level-debugger-with-breakpoints-single-stepping-etc">2.1.1. Is there a source code level debugger with breakpoints, single-stepping, etc.?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.general.html#is-there-a-tool-to-help-find-bugs-or-perform-static-analysis">2.1.2. Is there a tool to help find bugs or perform static analysis?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.general.html#how-can-i-create-a-stand-alone-binary-from-a-python-script">2.1.3. How can I create a stand-alone binary from a Python script?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.general.html#are-there-coding-standards-or-a-style-guide-for-python-programs">2.1.4. Are there coding standards or a style guide for Python programs?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.general.html#my-program-is-too-slow-how-do-i-speed-it-up">2.1.5. My program is too slow. How do I speed it up?</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/programming.core.html">2.2. Core Language</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.core.html#why-am-i-getting-an-unboundlocalerror-when-the-variable-has-a-value">2.2.1. Why am I getting an UnboundLocalError when the variable has a value?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.core.html#what-are-the-rules-for-local-and-global-variables-in-python">2.2.2. What are the rules for local and global variables in Python?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.core.html#why-do-lambdas-defined-in-a-loop-with-different-values-all-return-the-same-result">2.2.3. Why do lambdas defined in a loop with different values all return the same result?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.core.html#how-do-i-share-global-variables-across-modules">2.2.4. How do I share global variables across modules?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.core.html#what-are-the-best-practices-for-using-import-in-a-module">2.2.5. What are the &#8220;best practices&#8221; for using import in a module?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.core.html#why-are-default-values-shared-between-objects">2.2.6. Why are default values shared between objects?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.core.html#how-can-i-pass-optional-or-keyword-parameters-from-one-function-to-another">2.2.7. How can I pass optional or keyword parameters from one function to another?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.core.html#what-is-the-difference-between-arguments-and-parameters">2.2.8. What is the difference between arguments and parameters?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.core.html#why-did-changing-list-y-also-change-list-x">2.2.9. Why did changing list &#8216;y&#8217; also change list &#8216;x&#8217;?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.core.html#how-do-i-write-a-function-with-output-parameters-call-by-reference">2.2.10. How do I write a function with output parameters (call by reference)?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.core.html#how-do-you-make-a-higher-order-function-in-python">2.2.11. How do you make a higher order function in Python?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.core.html#how-do-i-copy-an-object-in-python">2.2.12. How do I copy an object in Python?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.core.html#how-can-i-find-the-methods-or-attributes-of-an-object">2.2.13. How can I find the methods or attributes of an object?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.core.html#how-can-my-code-discover-the-name-of-an-object">2.2.14. How can my code discover the name of an object?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.core.html#what-s-up-with-the-comma-operator-s-precedence">2.2.15. What&#8217;s up with the comma operator&#8217;s precedence?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.core.html#is-there-an-equivalent-of-c-s-ternary-operator">2.2.16. Is there an equivalent of C&#8217;s &#8221;?:&#8221; ternary operator?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.core.html#is-it-possible-to-write-obfuscated-one-liners-in-python">2.2.17. Is it possible to write obfuscated one-liners in Python?</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/programming.numstr.html">2.3. Numbers and strings</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.numstr.html#how-do-i-specify-hexadecimal-and-octal-integers">2.3.1. How do I specify hexadecimal and octal integers?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.numstr.html#why-does-22-10-return-3">2.3.2. Why does -22 // 10 return -3?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.numstr.html#how-do-i-convert-a-string-to-a-number">2.3.3. How do I convert a string to a number?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.numstr.html#how-do-i-convert-a-number-to-a-string">2.3.4. How do I convert a number to a string?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.numstr.html#how-do-i-modify-a-string-in-place">2.3.5. How do I modify a string in place?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.numstr.html#how-do-i-use-strings-to-call-functions-methods">2.3.6. How do I use strings to call functions/methods?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.numstr.html#is-there-an-equivalent-to-perl-s-chomp-for-removing-trailing-newlines-from-strings">2.3.7. Is there an equivalent to Perl&#8217;s chomp() for removing trailing newlines from strings?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.numstr.html#is-there-a-scanf-or-sscanf-equivalent">2.3.8. Is there a scanf() or sscanf() equivalent?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.numstr.html#what-does-unicodeerror-ascii-decoding-encoding-error-ordinal-not-in-range-128-mean">2.3.9. What does &#8216;UnicodeError: ASCII [decoding,encoding] error: ordinal not in range(128)&#8217; mean?</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/programming.sequences.html">2.4. Sequences (Tuples/Lists)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.sequences.html#how-do-i-convert-between-tuples-and-lists">2.4.1. How do I convert between tuples and lists?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.sequences.html#what-s-a-negative-index">2.4.2. What&#8217;s a negative index?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.sequences.html#how-do-i-iterate-over-a-sequence-in-reverse-order">2.4.3. How do I iterate over a sequence in reverse order?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.sequences.html#how-do-you-remove-duplicates-from-a-list">2.4.4. How do you remove duplicates from a list?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.sequences.html#how-do-you-make-an-array-in-python">2.4.5. How do you make an array in Python?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.sequences.html#how-do-i-create-a-multidimensional-list">2.4.6. How do I create a multidimensional list?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.sequences.html#how-do-i-apply-a-method-to-a-sequence-of-objects">2.4.7. How do I apply a method to a sequence of objects?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.sequences.html#why-does-a-tuple-i-item-raise-an-exception-when-the-addition-works">2.4.8. Why does a_tuple[i] += [&#8216;item&#8217;] raise an exception when the addition works?</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/programming.dict.html">2.5. Dictionaries</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.dict.html#how-can-i-get-a-dictionary-to-display-its-keys-in-a-consistent-order">2.5.1. How can I get a dictionary to display its keys in a consistent order?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.dict.html#i-want-to-do-a-complicated-sort-can-you-do-a-schwartzian-transform-in-python">2.5.2. I want to do a complicated sort: can you do a Schwartzian Transform in Python?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.dict.html#how-can-i-sort-one-list-by-values-from-another-list">2.5.3. How can I sort one list by values from another list?</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/programming.objects.html">2.6. Objects</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.objects.html#what-is-a-class">2.6.1. What is a class?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.objects.html#what-is-a-method">2.6.2. What is a method?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.objects.html#what-is-self">2.6.3. What is self?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.objects.html#how-do-i-check-if-an-object-is-an-instance-of-a-given-class-or-of-a-subclass-of-it">2.6.4. How do I check if an object is an instance of a given class or of a subclass of it?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.objects.html#what-is-delegation">2.6.5. What is delegation?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.objects.html#how-do-i-call-a-method-defined-in-a-base-class-from-a-derived-class-that-overrides-it">2.6.6. How do I call a method defined in a base class from a derived class that overrides it?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.objects.html#how-can-i-organize-my-code-to-make-it-easier-to-change-the-base-class">2.6.7. How can I organize my code to make it easier to change the base class?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.objects.html#how-do-i-create-static-class-data-and-static-class-methods">2.6.8. How do I create static class data and static class methods?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.objects.html#how-can-i-overload-constructors-or-methods-in-python">2.6.9. How can I overload constructors (or methods) in Python?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.objects.html#i-try-to-use-spam-and-i-get-an-error-about-someclassname-spam">2.6.10. I try to use __spam and I get an error about _SomeClassName__spam.</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.objects.html#my-class-defines-del-but-it-is-not-called-when-i-delete-the-object">2.6.11. My class defines __del__ but it is not called when I delete the object.</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.objects.html#how-do-i-get-a-list-of-all-instances-of-a-given-class">2.6.12. How do I get a list of all instances of a given class?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.objects.html#why-does-the-result-of-id-appear-to-be-not-unique">2.6.13. Why does the result of <code class="docutils literal"><span class="pre">id()</span></code> appear to be not unique?</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/programming.modules.html">2.7. Modules</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.modules.html#how-do-i-create-a-pyc-file">2.7.1. How do I create a .pyc file?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.modules.html#how-do-i-find-the-current-module-name">2.7.2. How do I find the current module name?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.modules.html#how-can-i-have-modules-that-mutually-import-each-other">2.7.3. How can I have modules that mutually import each other?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.modules.html#import-x-y-z-returns-module-x-how-do-i-get-z">2.7.4. __import__(&#8216;x.y.z&#8217;) returns &lt;module &#8216;x&#8217;&gt;; how do I get z?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/programming.modules.html#when-i-edit-an-imported-module-and-reimport-it-the-changes-don-t-show-up-why-does-this-happen">2.7.5. When I edit an imported module and reimport it, the changes don&#8217;t show up.  Why does this happen?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../faq/design.html">3. Design and History FAQ</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../faq/design.html#why-does-python-use-indentation-for-grouping-of-statements">3.1. Why does Python use indentation for grouping of statements?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/design.html#why-am-i-getting-strange-results-with-simple-arithmetic-operations">3.2. Why am I getting strange results with simple arithmetic operations?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/design.html#why-are-floating-point-calculations-so-inaccurate">3.3. Why are floating point calculations so inaccurate?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/design.html#why-are-python-strings-immutable">3.4. Why are Python strings immutable?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/design.html#why-must-self-be-used-explicitly-in-method-definitions-and-calls">3.5. Why must &#8216;self&#8217; be used explicitly in method definitions and calls?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/design.html#why-can-t-i-use-an-assignment-in-an-expression">3.6. Why can&#8217;t I use an assignment in an expression?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/design.html#why-does-python-use-methods-for-some-functionality-e-g-list-index-but-functions-for-other-e-g-len-list">3.7. Why does Python use methods for some functionality (e.g. list.index()) but functions for other (e.g. len(list))?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/design.html#why-is-join-a-string-method-instead-of-a-list-or-tuple-method">3.8. Why is join() a string method instead of a list or tuple method?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/design.html#how-fast-are-exceptions">3.9. How fast are exceptions?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/design.html#why-isn-t-there-a-switch-or-case-statement-in-python">3.10. Why isn&#8217;t there a switch or case statement in Python?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/design.html#can-t-you-emulate-threads-in-the-interpreter-instead-of-relying-on-an-os-specific-thread-implementation">3.11. Can&#8217;t you emulate threads in the interpreter instead of relying on an OS-specific thread implementation?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/design.html#why-can-t-lambda-expressions-contain-statements">3.12. Why can&#8217;t lambda expressions contain statements?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/design.html#can-python-be-compiled-to-machine-code-c-or-some-other-language">3.13. Can Python be compiled to machine code, C or some other language?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/design.html#how-does-python-manage-memory">3.14. How does Python manage memory?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/design.html#why-isn-t-all-memory-freed-when-python-exits">3.15. Why isn&#8217;t all memory freed when Python exits?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/design.html#why-are-there-separate-tuple-and-list-data-types">3.16. Why are there separate tuple and list data types?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/design.html#how-are-lists-implemented">3.17. How are lists implemented?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/design.html#how-are-dictionaries-implemented">3.18. How are dictionaries implemented?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/design.html#why-must-dictionary-keys-be-immutable">3.19. Why must dictionary keys be immutable?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/design.html#why-doesn-t-list-sort-return-the-sorted-list">3.20. Why doesn&#8217;t list.sort() return the sorted list?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/design.html#how-do-you-specify-and-enforce-an-interface-spec-in-python">3.21. How do you specify and enforce an interface spec in Python?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/design.html#why-is-there-no-goto">3.22. Why is there no goto?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/design.html#why-can-t-raw-strings-r-strings-end-with-a-backslash">3.23. Why can&#8217;t raw strings (r-strings) end with a backslash?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/design.html#why-doesn-t-python-have-a-with-statement-for-attribute-assignments">3.24. Why doesn&#8217;t Python have a &#8220;with&#8221; statement for attribute assignments?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/design.html#why-are-colons-required-for-the-if-while-def-class-statements">3.25. Why are colons required for the if/while/def/class statements?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/design.html#why-does-python-allow-commas-at-the-end-of-lists-and-tuples">3.26. Why does Python allow commas at the end of lists and tuples?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../faq/library.html">4. Library and Extension FAQ</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../faq/library.html#general-library-questions">4.1. General Library Questions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../faq/library.html#how-do-i-find-a-module-or-application-to-perform-task-x">4.1.1. How do I find a module or application to perform task X?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/library.html#where-is-the-math-py-socket-py-regex-py-etc-source-file">4.1.2. Where is the math.py (socket.py, regex.py, etc.) source file?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/library.html#how-do-i-make-a-python-script-executable-on-unix">4.1.3. How do I make a Python script executable on Unix?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/library.html#is-there-a-curses-termcap-package-for-python">4.1.4. Is there a curses/termcap package for Python?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/library.html#is-there-an-equivalent-to-c-s-onexit-in-python">4.1.5. Is there an equivalent to C&#8217;s onexit() in Python?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/library.html#why-don-t-my-signal-handlers-work">4.1.6. Why don&#8217;t my signal handlers work?</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/library.html#common-tasks">4.2. Common tasks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../faq/library.html#how-do-i-test-a-python-program-or-component">4.2.1. How do I test a Python program or component?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/library.html#how-do-i-create-documentation-from-doc-strings">4.2.2. How do I create documentation from doc strings?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/library.html#how-do-i-get-a-single-keypress-at-a-time">4.2.3. How do I get a single keypress at a time?</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/library.html#threads">4.3. Threads</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../faq/library.html#how-do-i-program-using-threads">4.3.1. How do I program using threads?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/library.html#none-of-my-threads-seem-to-run-why">4.3.2. None of my threads seem to run: why?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/library.html#how-do-i-parcel-out-work-among-a-bunch-of-worker-threads">4.3.3. How do I parcel out work among a bunch of worker threads?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/library.html#what-kinds-of-global-value-mutation-are-thread-safe">4.3.4. What kinds of global value mutation are thread-safe?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/library.html#can-t-we-get-rid-of-the-global-interpreter-lock">4.3.5. Can&#8217;t we get rid of the Global Interpreter Lock?</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/library.html#input-and-output">4.4. Input and Output</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../faq/library.html#how-do-i-delete-a-file-and-other-file-questions">4.4.1. How do I delete a file? (And other file questions...)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/library.html#how-do-i-copy-a-file">4.4.2. How do I copy a file?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/library.html#how-do-i-read-or-write-binary-data">4.4.3. How do I read (or write) binary data?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/library.html#i-can-t-seem-to-use-os-read-on-a-pipe-created-with-os-popen-why">4.4.4. I can&#8217;t seem to use os.read() on a pipe created with os.popen(); why?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/library.html#how-do-i-run-a-subprocess-with-pipes-connected-to-both-input-and-output">4.4.5. How do I run a subprocess with pipes connected to both input and output?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/library.html#how-do-i-access-the-serial-rs232-port">4.4.6. How do I access the serial (RS232) port?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/library.html#why-doesn-t-closing-sys-stdout-stdin-stderr-really-close-it">4.4.7. Why doesn&#8217;t closing sys.stdout (stdin, stderr) really close it?</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/library.html#network-internet-programming">4.5. Network/Internet Programming</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../faq/library.html#what-www-tools-are-there-for-python">4.5.1. What WWW tools are there for Python?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/library.html#how-can-i-mimic-cgi-form-submission-method-post">4.5.2. How can I mimic CGI form submission (METHOD=POST)?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/library.html#what-module-should-i-use-to-help-with-generating-html">4.5.3. What module should I use to help with generating HTML?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/library.html#how-do-i-send-mail-from-a-python-script">4.5.4. How do I send mail from a Python script?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/library.html#how-do-i-avoid-blocking-in-the-connect-method-of-a-socket">4.5.5. How do I avoid blocking in the connect() method of a socket?</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/library.html#databases">4.6. Databases</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../faq/library.html#are-there-any-interfaces-to-database-packages-in-python">4.6.1. Are there any interfaces to database packages in Python?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/library.html#how-do-you-implement-persistent-objects-in-python">4.6.2. How do you implement persistent objects in Python?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/library.html#why-is-cpickle-so-slow">4.6.3. Why is cPickle so slow?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/library.html#if-my-program-crashes-with-a-bsddb-or-anydbm-database-open-it-gets-corrupted-how-come">4.6.4. If my program crashes with a bsddb (or anydbm) database open, it gets corrupted. How come?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/library.html#i-tried-to-open-berkeley-db-file-but-bsddb-produces-bsddb-error-22-invalid-argument-help-how-can-i-restore-my-data">4.6.5. I tried to open Berkeley DB file, but bsddb produces bsddb.error: (22, &#8216;Invalid argument&#8217;). Help! How can I restore my data?</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/library.html#mathematics-and-numerics">4.7. Mathematics and Numerics</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../faq/library.html#how-do-i-generate-random-numbers-in-python">4.7.1. How do I generate random numbers in Python?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../faq/extending.html">5. Extending/Embedding FAQ</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../faq/extending.html#can-i-create-my-own-functions-in-c">5.1. Can I create my own functions in C?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/extending.html#id1">5.2. Can I create my own functions in C++?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/extending.html#writing-c-is-hard-are-there-any-alternatives">5.3. Writing C is hard; are there any alternatives?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/extending.html#how-can-i-execute-arbitrary-python-statements-from-c">5.4. How can I execute arbitrary Python statements from C?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/extending.html#how-can-i-evaluate-an-arbitrary-python-expression-from-c">5.5. How can I evaluate an arbitrary Python expression from C?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/extending.html#how-do-i-extract-c-values-from-a-python-object">5.6. How do I extract C values from a Python object?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/extending.html#how-do-i-use-py-buildvalue-to-create-a-tuple-of-arbitrary-length">5.7. How do I use Py_BuildValue() to create a tuple of arbitrary length?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/extending.html#how-do-i-call-an-object-s-method-from-c">5.8. How do I call an object&#8217;s method from C?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/extending.html#how-do-i-catch-the-output-from-pyerr-print-or-anything-that-prints-to-stdout-stderr">5.9. How do I catch the output from PyErr_Print() (or anything that prints to stdout/stderr)?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/extending.html#how-do-i-access-a-module-written-in-python-from-c">5.10. How do I access a module written in Python from C?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/extending.html#how-do-i-interface-to-c-objects-from-python">5.11. How do I interface to C++ objects from Python?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/extending.html#i-added-a-module-using-the-setup-file-and-the-make-fails-why">5.12. I added a module using the Setup file and the make fails; why?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/extending.html#how-do-i-debug-an-extension">5.13. How do I debug an extension?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/extending.html#i-want-to-compile-a-python-module-on-my-linux-system-but-some-files-are-missing-why">5.14. I want to compile a Python module on my Linux system, but some files are missing. Why?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/extending.html#what-does-systemerror-pyimport-fixupextension-module-yourmodule-not-loaded-mean">5.15. What does &#8220;SystemError: _PyImport_FixupExtension: module yourmodule not loaded&#8221; mean?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/extending.html#how-do-i-tell-incomplete-input-from-invalid-input">5.16. How do I tell &#8220;incomplete input&#8221; from &#8220;invalid input&#8221;?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/extending.html#how-do-i-find-undefined-g-symbols-builtin-new-or-pure-virtual">5.17. How do I find undefined g++ symbols __builtin_new or __pure_virtual?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/extending.html#can-i-create-an-object-class-with-some-methods-implemented-in-c-and-others-in-python-e-g-through-inheritance">5.18. Can I create an object class with some methods implemented in C and others in Python (e.g. through inheritance)?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/extending.html#when-importing-module-x-why-do-i-get-undefined-symbol-pyunicodeucs2">5.19. When importing module X, why do I get &#8220;undefined symbol: PyUnicodeUCS2*&#8221;?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../faq/windows.html">6. Python on Windows FAQ</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../faq/windows.html#how-do-i-run-a-python-program-under-windows">6.1. How do I run a Python program under Windows?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/windows.html#how-do-i-make-python-scripts-executable">6.2. How do I make Python scripts executable?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/windows.html#why-does-python-sometimes-take-so-long-to-start">6.3. Why does Python sometimes take so long to start?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/windows.html#how-do-i-make-an-executable-from-a-python-script">6.4. How do I make an executable from a Python script?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/windows.html#is-a-pyd-file-the-same-as-a-dll">6.5. Is a <code class="docutils literal"><span class="pre">*.pyd</span></code> file the same as a DLL?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/windows.html#how-can-i-embed-python-into-a-windows-application">6.6. How can I embed Python into a Windows application?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/windows.html#how-do-i-keep-editors-from-inserting-tabs-into-my-python-source">6.7. How do I keep editors from inserting tabs into my Python source?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/windows.html#how-do-i-check-for-a-keypress-without-blocking">6.8. How do I check for a keypress without blocking?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/windows.html#how-do-i-emulate-os-kill-in-windows">6.9. How do I emulate os.kill() in Windows?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/windows.html#how-do-i-extract-the-downloaded-documentation-on-windows">6.10. How do I extract the downloaded documentation on Windows?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../faq/gui.html">7. Graphic User Interface FAQ</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../faq/gui.html#what-platform-independent-gui-toolkits-exist-for-python">7.1. What platform-independent GUI toolkits exist for Python?</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../faq/gui.html#tkinter">7.1.1. Tkinter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/gui.html#wxwidgets">7.1.2. wxWidgets</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/gui.html#qt">7.1.3. Qt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/gui.html#gtk">7.1.4. Gtk+</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/gui.html#fltk">7.1.5. FLTK</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/gui.html#fox">7.1.6. FOX</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/gui.html#opengl">7.1.7. OpenGL</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/gui.html#what-platform-specific-gui-toolkits-exist-for-python">7.2. What platform-specific GUI toolkits exist for Python?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/gui.html#tkinter-questions">7.3. Tkinter questions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../faq/gui.html#how-do-i-freeze-tkinter-applications">7.3.1. How do I freeze Tkinter applications?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/gui.html#can-i-have-tk-events-handled-while-waiting-for-i-o">7.3.2. Can I have Tk events handled while waiting for I/O?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../faq/gui.html#i-can-t-get-key-bindings-to-work-in-tkinter-why">7.3.3. I can&#8217;t get key bindings to work in Tkinter: why?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../faq/installed.html">8. &#8220;Why is Python Installed on my Computer?&#8221; FAQ</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../faq/installed.html#what-is-python">8.1. What is Python?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/installed.html#why-is-python-installed-on-my-machine">8.2. Why is Python installed on my machine?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../faq/installed.html#can-i-delete-python">8.3. Can I delete Python?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Python Documentation</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="2.7.html">What&#8217;s New in Python 2.7</a> &raquo;</li>
+        
+      <li>5. PEP 378: Format Specifier for Thousands Separator</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/whats_new/part5.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="pep-378-format-specifier-for-thousands-separator">
+<span id="pep-0378"></span><h1>5. PEP 378: Format Specifier for Thousands Separator<a class="headerlink" href="#pep-378-format-specifier-for-thousands-separator" title="Permalink to this headline">¶</a></h1>
+<p>To make program output more readable, it can be useful to add
+separators to large numbers, rendering them as
+18,446,744,073,709,551,616 instead of 18446744073709551616.</p>
+<p>The fully general solution for doing this is the <code class="xref py py-mod docutils literal"><span class="pre">locale</span></code> module,
+which can use different separators (&#8221;,&#8221; in North America, &#8221;.&#8221; in
+Europe) and different grouping sizes, but <code class="xref py py-mod docutils literal"><span class="pre">locale</span></code> is complicated
+to use and unsuitable for multi-threaded applications where different
+threads are producing output for different locales.</p>
+<p>Therefore, a simple comma-grouping mechanism has been added to the
+mini-language used by the <code class="xref py py-meth docutils literal"><span class="pre">str.format()</span></code> method.  When
+formatting a floating-point number, simply include a comma between the
+width and the precision:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s1">&#39;{:20,.2f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mf">18446744073709551616.0</span><span class="p">)</span>
+<span class="go">&#39;18,446,744,073,709,551,616.00&#39;</span>
+</pre></div>
+</div>
+<p>When formatting an integer, include the comma after the width:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="s1">&#39;{:20,d}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">18446744073709551616</span><span class="p">)</span>
+<span class="go">&#39;18,446,744,073,709,551,616&#39;</span>
+</pre></div>
+</div>
+<p>This mechanism is not adaptable at all; commas are always used as the
+separator and the grouping is always into three-digit groups.  The
+comma-formatting mechanism isn&#8217;t as general as the <code class="xref py py-mod docutils literal"><span class="pre">locale</span></code>
+module, but it&#8217;s easier to use.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><span class="target" id="index-0"></span><a class="pep reference external" href="https://www.python.org/dev/peps/pep-0378"><strong>PEP 378</strong></a> - Format Specifier for Thousands Separator</dt>
+<dd>PEP written by Raymond Hettinger; implemented by Eric Smith.</dd>
+</dl>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="part6.html" class="btn btn-neutral float-right" title="6. PEP 389: The argparse Module for Parsing Command Lines" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="part4.html" class="btn btn-neutral" title="4. PEP 372: Adding an Ordered Dictionary to collections" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/copybutton.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
